@@ -354,4 +354,8 @@ const mp_obj_module_t hashlib_user_cmodule = {
     .globals = (mp_obj_dict_t*)&hashlib_module_globals,
 };
 
-MP_REGISTER_MODULE(MP_QSTR_hashlib, hashlib_user_cmodule, MODULE_HASHLIB_ENABLED);
+#if CONFIG_IDF_TARGET_ESP32S2 || CONFIG_IDF_TARGET_ESP32S3
+    MP_REGISTER_MODULE(MP_QSTR_hashlib, hashlib_user_cmodule);
+#else
+    MP_REGISTER_MODULE(MP_QSTR_hashlib, hashlib_user_cmodule, MODULE_HASHLIB_ENABLED);
+#endif
